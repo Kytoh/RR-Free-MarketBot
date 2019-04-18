@@ -2,12 +2,11 @@
 // @name         Rival Regions - Free Market Bot
 // @namespace    http://discord.gg/DtQQAZd
 // @version      2.4.12
-// @description  Requiere AutoSell y AutoBuyer
 // @author       KCSystem
 // @match        http://rivalregions.com
 // @match        https://rivalregions.com
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/Kytoh/MyBots/master/full_market_bot_24
+// @updateURL    https://raw.githubusercontent.com/Kytoh/RR-Free-MarketBot/master/alphabay-free-market-bot
 // ==/UserScript==
 
 (function() {
