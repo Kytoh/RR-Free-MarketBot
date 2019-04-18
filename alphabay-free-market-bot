@@ -1,0 +1,157 @@
+// ==UserScript==
+// @name         Rival Regions - Free Market Bot
+// @namespace    http://discord.gg/DtQQAZd
+// @version      2.4.12
+// @description  Requiere AutoSell y AutoBuyer
+// @author       KCSystem
+// @match        http://rivalregions.com
+// @match        https://rivalregions.com
+// @grant        none
+// @updateURL    https://raw.githubusercontent.com/Kytoh/MyBots/master/full_market_bot_24
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    var app_version = 'v2.4.12';
+
+    $( document ).ajaxComplete(function() {
+        if (window.location.href.substring(window.location.href.indexOf("#")+1) != 'storage' && $( "#nyancatnyancat-free" ).length){
+            $( "#nyancatnyancat-free" ).remove();
+        }else if(window.location.href.substring(window.location.href.indexOf("#")+1) == 'storage' && !$( "#nyancatnyancat-free" ).length){
+            insertBanner();
+        }
+    });
+
+    function insertBanner(){
+        var pathname = window.location.href;
+        pathname = pathname.substring(pathname.indexOf("#")+1);
+        console.log(pathname);
+        if (pathname == 'storage' && !$( "#nyancatnyancat-free" ).length){
+            $(".konf_maker").parent().before('<style>input.nyah,select.nyah{float:right;width:250px;}#nyancatnyancat{line-height:1.5em}</style>'+
+                                           '<div id="nyancatnyancat-free" style="width:700px;height:290px;margin-top:25px;margin-left:auto;margin-right:auto;padding-left: 25px;padding-right: 25px" class="ib tc">'+
+                                             '<h1 style="text-align:center">AlphaBay Free Market Bot('+app_version+')</h1>'+
+                                           '<div style="width:150;display:inline-block;float:left">'+
+                                                "<iframe id='a2dbf12a' name='a2dbf12a' src='https://ads.kcsystem.es/www/delivery/afr.php?zoneid=27&amp;cb=%n&amp;ct0=%c' frameborder='0' scrolling='no' width='120' height='240'><a href='https://ads.kcsystem.es/www/delivery/ck.php?n=a2eef798&amp;cb=%n' target='_blank'><img src='https://ads.kcsystem.es/www/delivery/avw.php?zoneid=27&amp;cb=%n&amp;n=a2eef798&amp;ct0=%c' border='0' alt='' /></a></iframe>"+
+                                             '</div>'+
+                                           '<div style="padding:10px;width:15%;display:inline-block;">OE 12 Secs</div>'+
+                                           '<div style="padding:10px;width:50%;display:inline-block;"><select id="every-resource"><option value="1">2 Operation Every 12 Seconds (1 Buy + 1 Sell) </option><option value="2">3 Operations Every 12 Seconds (2 Buy + 1 Sell) </option><option value="3">4 Operations Every 12 Seconds (3 Buy + 1 Sell) </option></select></div>'+
+                                           '<div style="padding:10px;width:20%;display:inline-block;">Resource to Work On</div>'+
+                                           '<div style="padding:10px;width:50%;display:inline-block;"><select id="all-resource">'+
+                                             '<optgroup label="Resources"><option value="3">Petrol/Oil</option><option value="4">Mineral/Rocks</option><option value="11">Uranium</option><option value="15">Diamonds</option><option value="21">Liquid O2</option><option value="24">H3</option></optgroup>'+
+                                             '<optgroup label="Items"><option value="13">Antirad</option><option value="20">Stellar Ships</option></optgroup>'+
+                                             '<optgroup label="Weapons"><option value="2">Tanks</option><option value="1">Planes</option><option value="14">Missile</option><option value="16">Bombership</option><option value="18">Battleship</option><option value="22">Lunar Tank</option><option value="23">Spacial Station</option><</optgroup>'+
+                                             '</select></div>'+
+                                           '<div style="padding:10px;width:20%;display:inline-block;">Pricing</div>'+
+                                           '<div style="padding:10px;width:45%;display:inline-block;">Sell Price: <input value="" placeholder="Sell Price" id="all-sellerPrice"/><br/>Buy Price: <input value="" placeholder="MAX buy Pricing" id="all-maxPrice"/></div>'+
+                                           '<div style="padding:10px;width:15%;display:inline-block;"><span class="button_red" style="width:440px" id="buy-and-sell-btn">Start / Stop Bot</span></div>'+
+                                           '<br><center>This bot is free. If you have paid you have been scammed.<br/> Join <a href="http://discord.gg/G6Tu5cn">AlphaBay</a> to get free bots and a real black market experience. (Only +60)</center>'+
+                                           '<br>'+
+                                           '</div>'+
+                                           '<div id="botEnabled" style="display:none;text-align:center;color:red;margin-top:5px;width:750px;margin-left:auto;margin-right:auto;" class="ib tc"></div>'+
+                                           '<div id="botLog" style="display:none;position:absolute;top: 105px;left: 10px;;width:250px;float:left;" class="ib tc"></div>');
+            document.getElementById ("buy-and-sell-btn").addEventListener ("click", AllAutoClickButton , false);
+        }
+    }
+
+    var allauto = 0;
+    var v_log = [];
+    //--- Activate the newly added button.
+    document.getElementById ("buy-and-sell-btn").addEventListener (
+        "click", AllAutoClickButton, false
+    );
+
+    function AllAuto(){
+        $('#reload_menu').click();
+        setTimeout(function(){
+                MarketBuyer();
+            }, 0);
+        if(parseInt($('#every-resource').val()) >= 2){
+            setTimeout(function(){
+                MarketBuyer();
+            }, 3000);
+        }
+        setTimeout(function(){
+            MarketSeller();
+            }, 7000);
+        if(parseInt($('#every-resource').val()) >= 3){
+            setTimeout(function(){
+                MarketBuyer();
+            }, 10000);
+        }
+    }
+
+    function MarketSeller () {
+        var maxSellAmmount = {3: 204800000,4: 204800000, 11:15360000, 15:153600, 21: 38400000, 24: 153600, 13: 76800, 20: 3840, 2: 4388571, 1: 640000,14: 256000, 16:128000, 18:128000, 22:12800, 23:1280 };
+        var resource = document.getElementById('all-resource').value;
+        var sellerPrice = document.getElementById('all-sellerPrice').value;
+        var sellerAmmount = maxSellAmmount[resource];
+
+        $('.storage_item[url='+resource+']').click();
+        setTimeout(function(){
+            $(".storage_sell").click();
+            setTimeout(function(){
+                $(".storage_sell_price").val(sellerPrice);
+                //$(".storage_sell_ammount").val(sellerAmmount);
+                $('.storage_sell_button').removeClass("no_pointer").removeClass("button_red").addClass("button_green");
+                $('.storage_sell_button').click();
+            }, 1000);
+        }, 1000);
+    }
+
+    function MarketBuyer () {
+        var money = parseInt($('#money span').html().replace(/\./g, ''));
+        var resource = parseInt(document.getElementById('all-resource').value);
+        var maxPrice = parseInt(document.getElementById('all-maxPrice').value);
+        $('.storage_item[url='+resource+']').click();
+
+        setTimeout(function(){
+            var currentPrice = parseInt($('.storage_price span span').html().substr(0, $('.storage_price span span').html().indexOf(' ')).replace(/\./g, ''));
+            if (currentPrice <= maxPrice){
+                // seller quantity
+                var buyable = 0;
+                var sellerSells = parseInt($('.storage_market_number').html().replace(/\./g, ''));
+                // max money buying
+                var canBuyWithMoney = Math.trunc(money / currentPrice);
+                if(sellerSells > canBuyWithMoney){
+                    buyable = canBuyWithMoney - 100;
+                }else{
+                    buyable = sellerSells - 100;
+                }
+                // Lets buy now
+                if (buyable > 0){
+                    $('.storage_buy_input').val(buyable);
+                    setTimeout(function(){
+                        $('.storage_buy_button').click();
+                        var dt = new Date();
+                        var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                        vlog('['+ time +'] bought '+ buyable +' '+$('#all-resource :selected').html()+' at '+currentPrice+'€');
+                    }, 300);
+                }
+            }
+        }, 1000);
+    }
+
+    function vlog(message){
+        v_log.push(message);
+        console.log(v_log.length);
+        if (v_log.length > 5){
+            v_log.shift();
+        }
+        $('#botLog').html(v_log.join('<br>'));
+    }
+
+    function AllAutoClickButton(){
+        if(allauto == 0){
+            console.log('Starting Bot...');
+            $('#botEnabled').html('Starting Bot...').fadeIn().delay(5000).html('Bot Running...');
+            $('#botLog').html('').fadeIn();
+            allauto = setInterval(AllAuto, 12000);
+        }else{
+            clearInterval(allauto);
+            allauto = 0;
+            $('#botEnabled').html('Stopping Bot...').delay(12000).fadeOut();
+            $('#botLog').delay(12000).fadeOut();
+        }
+    }
+
+})();
