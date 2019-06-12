@@ -30,7 +30,7 @@
         pathname = pathname.substring(pathname.indexOf("#")+1);
         if (pathname == 'overview' && !$( "#nindex_history" ).length){
             $('#index_soldier').remove();
-            $('#index_history .in_32').html('AlphaBay Learner (1.0.3)');
+            $('#index_history .in_32').html('AlphaBay Free Learner (1.0.3)');
             if($( "#learnerbot" ).length) $("#nindex_history").remove();
             $('#index_history').removeAttr('action').removeClass('header_buttons_hover').removeClass('pointer').append('<span id="nindex_history"><span class="button_red" id="autolearn-btn">Start learning as a Hacker</span>'+
                                                                                                                        '<select class="select_dd_paper dd-select" style="width:100%;background:#252525;border:1px solid white;color:white" id="all-educate"><option value="3">Endurance</option><option value="2">Education</option><option value="1">Strength</option></select>'+
