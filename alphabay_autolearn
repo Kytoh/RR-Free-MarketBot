@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Rival Regions - AutoLearn
 // @namespace    http://discord.gg/DtQQAZd
-// @version      1.0.3
+// @version      1.0.4
 // @description  Nyancat
 // @author       You
 // @match        http://rivalregions.com
@@ -70,7 +70,7 @@
     }
 
     function AllLearnClickButton(){
-        var nextTime = 10000;
+        var nextTime = 30000;
 
         a1 = setTimeout(function(){
             $(".index_menu").click();
