@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Rival Regions - Free Market Bot
 // @namespace    http://discord.gg/DtQQAZd
-// @version      2.4.12.1
+// @version      2.4.13
 // @author       KCSystem
 // @match        http://rivalregions.com
 // @match        https://rivalregions.com
@@ -11,7 +11,7 @@
 
 (function() {
     'use strict';
-    var app_version = 'v2.4.12.1';
+    var app_version = 'v2.4.13';
 
     $( document ).ajaxComplete(function() {
         if (window.location.href.substring(window.location.href.indexOf("#")+1) != 'storage' && $( "#nyancatnyancat-free" ).length){
@@ -28,7 +28,7 @@
         if (pathname == 'storage' && !$( "#nyancatnyancat-free" ).length){
             $(".konf_maker").parent().before('<style>input.nyah,select.nyah{float:right;width:250px;}#nyancatnyancat{line-height:1.5em}</style>'+
                                            '<div id="nyancatnyancat-free" style="width:700px;height:290px;margin-top:25px;margin-left:auto;margin-right:auto;padding-left: 25px;padding-right: 25px" class="ib tc">'+
-                                             '<h1 style="text-align:center">AlphaBay Free Market Bot('+app_version+')</h1>'+
+                                             '<h1 style="text-align:center">LoliconBay Free Market Bot('+app_version+')</h1>'+
                                            '<div style="width:150;display:inline-block;float:left">'+
                                                 "<iframe id='a2dbf12a' name='a2dbf12a' src='https://ads.kcsystem.es/www/delivery/afr.php?zoneid=27&amp;cb=%n&amp;ct0=%c' frameborder='0' scrolling='no' width='120' height='240'><a href='https://ads.kcsystem.es/www/delivery/ck.php?n=a2eef798&amp;cb=%n' target='_blank'><img src='https://ads.kcsystem.es/www/delivery/avw.php?zoneid=27&amp;cb=%n&amp;n=a2eef798&amp;ct0=%c' border='0' alt='' /></a></iframe>"+
                                              '</div>'+
@@ -43,7 +43,7 @@
                                            '<div style="padding:10px;width:20%;display:inline-block;">Pricing</div>'+
                                            '<div style="padding:10px;width:45%;display:inline-block;">Sell Price: <input value="" placeholder="Sell Price" id="all-sellerPrice"/><br/>Buy Price: <input value="" placeholder="MAX buy Pricing" id="all-maxPrice"/></div>'+
                                            '<div style="padding:10px;width:15%;display:inline-block;"><span class="button_red" style="width:440px" id="buy-and-sell-btn">Start / Stop Bot</span></div>'+
-                                           '<br><center>This bot is free. If you have paid you have been scammed.<br/> Join <a href="http://discord.gg/G6Tu5cn">AlphaBay</a> to get free bots and a real black market experience. (Only +60)</center>'+
+                                           '<br><center>This bot is free. If you have paid you have been scammed.<br/> Join <a href="http://discord.gg/G6Tu5cn">LoliconBay</a> to get free bots and a real black market experience. (Only +60)</center>'+
                                            '<br>'+
                                            '</div>'+
                                            '<div id="botEnabled" style="display:none;text-align:center;color:red;margin-top:5px;width:750px;margin-left:auto;margin-right:auto;" class="ib tc"></div>'+
