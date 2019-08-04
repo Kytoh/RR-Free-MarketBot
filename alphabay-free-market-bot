@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Rival Regions - Free Market Bot
 // @namespace    http://discord.gg/DtQQAZd
-// @version      2.4.13
+// @version      2.4.14
 // @author       KCSystem
 // @match        http://rivalregions.com
 // @match        https://rivalregions.com
@@ -11,7 +11,7 @@
 
 (function() {
     'use strict';
-    var app_version = 'v2.4.13';
+    var app_version = 'v2.4.14';
 
     $( document ).ajaxComplete(function() {
         if (window.location.href.substring(window.location.href.indexOf("#")+1) != 'storage' && $( "#nyancatnyancat-free" ).length){
@@ -43,7 +43,7 @@
                                            '<div style="padding:10px;width:20%;display:inline-block;">Pricing</div>'+
                                            '<div style="padding:10px;width:45%;display:inline-block;">Sell Price: <input value="" placeholder="Sell Price" id="all-sellerPrice"/><br/>Buy Price: <input value="" placeholder="MAX buy Pricing" id="all-maxPrice"/></div>'+
                                            '<div style="padding:10px;width:15%;display:inline-block;"><span class="button_red" style="width:440px" id="buy-and-sell-btn">Start / Stop Bot</span></div>'+
-                                           '<br><center>This bot is free. If you have paid you have been scammed.<br/> Join <a href="http://discord.gg/G6Tu5cn">LoliconBay</a> to get free bots and a real black market experience. (Only +60)</center>'+
+                                           '<br><div style="text-align:centerdisplay:inline-block">This bot is free. If you have paid you have been scammed.<br>Join <a href="http://discord.gg/G6Tu5cn">LoliconBay</a> to get free bots and a real black market experience.(Only +60)</div>'+
                                            '<br>'+
                                            '</div>'+
                                            '<div id="botEnabled" style="display:none;text-align:center;color:red;margin-top:5px;width:750px;margin-left:auto;margin-right:auto;" class="ib tc"></div>'+
