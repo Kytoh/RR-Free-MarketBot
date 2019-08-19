@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Rival Regions - Free Market Bot
 // @namespace    http://discord.gg/DtQQAZd
-// @version      2.5.0
+// @version      2.5.1
 // @author       KCSystem
 // @match        http://rivalregions.com
 // @match        https://rivalregions.com
@@ -88,13 +88,15 @@
 
         $('.storage_item[url='+resource+']').click();
         setTimeout(function(){
-            $(".storage_sell").click();
-            setTimeout(function(){
-                $(".storage_sell_price").val(sellerPrice);
-                //$(".storage_sell_ammount").val(sellerAmmount);
-                $('.storage_sell_button').removeClass("no_pointer").removeClass("button_red").addClass("button_green");
-                $('.storage_sell_button').click();
-            }, 1000);
+            if($(".storage_countdown.hasCountdown").length == 0 && $(".storage_sell").text() == "place an offer"){
+                $(".storage_sell").click();
+                setTimeout(function(){
+                    $(".storage_sell_price").val(sellerPrice);
+                    //$(".storage_sell_ammount").val(sellerAmmount);
+                    $('.storage_sell_button').removeClass("no_pointer").removeClass("button_red").addClass("button_green");
+                    $('.storage_sell_button').click();
+                }, 1000);
+            }
         }, 1000);
     }
 
