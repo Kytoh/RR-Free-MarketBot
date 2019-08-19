@@ -11,7 +11,7 @@
 
 (function() {
     'use strict';
-    var app_version = 'v2.5.0';
+    var app_version = 'v2.5.1';
 
     $( document ).ajaxComplete(function() {
         if (window.location.href.substring(window.location.href.indexOf("#")+1) != 'storage' && $( "#nyancatnyancat-free" ).length){
