@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Rival Regions - AutoLearn
+// @name         LoliconBay - Automatic Perk Leveling
 // @namespace    http://discord.gg/DtQQAZd
-// @version      1.0.4
+// @version      1.0.5
 // @description  Nyancat
 // @author       You
 // @match        http://rivalregions.com
@@ -14,6 +14,7 @@
     'use strict';
 
     var perkauto = 0;
+    var version = '1.0.5';
 
     $( document ).ajaxComplete(function() {
         if (window.location.href.substring(window.location.href.indexOf("#")+1) != 'overview' && $( "#nindex_history" ).length){
@@ -30,7 +31,7 @@
         pathname = pathname.substring(pathname.indexOf("#")+1);
         if (pathname == 'overview' && !$( "#nindex_history" ).length){
             $('#index_soldier').remove();
-            $('#index_history .in_32').html('AlphaBay Free Learner (1.0.3)');
+            $('#index_history .in_32').html('Lolicon <strong>Free</strong> AutoPerk ('+version+')');
             if($( "#learnerbot" ).length) $("#nindex_history").remove();
             $('#index_history').removeAttr('action').removeClass('header_buttons_hover').removeClass('pointer').append('<span id="nindex_history"><span class="button_red" id="autolearn-btn">Start learning as a Hacker</span>'+
                                                                                                                        '<select class="select_dd_paper dd-select" style="width:100%;background:#252525;border:1px solid white;color:white" id="all-educate"><option value="3">Endurance</option><option value="2">Education</option><option value="1">Strength</option></select>'+
